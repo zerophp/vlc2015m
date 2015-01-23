@@ -27,7 +27,7 @@ enctype="multipart/form-data">
         </li>
         <li>
             <label>Foto</label>
-            <input type="file" name="name" />
+            <input type="file" name="photo" />
         </li>
         <li>
             <label>Privacidad</label>
