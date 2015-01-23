@@ -1,0 +1,7 @@
+|asdasd|agustincl@gmail.com|sdfsdfsdf|2015-01-01|asdasdasdasd|si,spam|o|Valencia|Cine,Deporte,Viajes|Enviar
+|asdasd|agustincl@gmail.com|sdfsdfsdf|2015-01-01|asdasdasdasd|si,spam|o|Valencia|Cine,Deporte,Viajes|Enviar
+|asdasd|agustincl@gmail.com|sdfsdfsdf|2015-01-01|asdasdasdasd|si,spam|o|Valencia|Cine,Deporte,Viajes|Enviar
+|Agustin|agustincl@gmail.com|1234|2015-01-01|kakakak|si,spam|o|Madrid|Cine,Viajes|Enviar
+|Agustin|agustincl@gmail.com|1234|2015-01-01|kakakak|si,spam|o|Madrid|Viajes|Enviar
+|Agustin|agustincl@gmail.com|1234|2015-01-01|kakakak|si,spam|o|Madrid|Viajes|Enviar
+|Agustin|agustincl@gmail.com|1234|2015-01-01|kakakak|si,spam|o|Madrid|Viajes|Enviar
