@@ -28,6 +28,7 @@ function filterForm($form, $data)
                     default:
                         return $valor;
                 }
+                //TODO escape!!!"
             }
         }
         else
