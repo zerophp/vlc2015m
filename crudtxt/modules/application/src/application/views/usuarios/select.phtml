@@ -1,0 +1,27 @@
+<?php
+$html="<a href=\"usuarios.php?action=insert\">Insert</a>";
+$html.="<table border=1>";
+foreach ($usuarios as $key => $usuario)
+{
+    // para cada fila/usuario separar por pipes
+    $usuario = explode("|", $usuario);
+    // dibujo la fila
+    $html.="<tr>";
+    // recorrer el array de usuario
+    foreach ($usuario as $key2 => $data)
+    {
+        // dibujar la columna
+        $html.="<td>";
+        // poner el dato
+        $html.=$data;
+        $html.="</td>";
+    }
+    // poner opciones
+    $html.="<td>";
+    $html.="<a href=\"usuarios.php?action=update&id=".$key."\">Update</a> | ";
+    $html.="<a href=\"usuarios.php?action=delete&id=".$key."\">Delete</a>";
+    $html.="</td>";
+    $html.="</tr>";
+}
+$html.="</table>";
+echo $html;
