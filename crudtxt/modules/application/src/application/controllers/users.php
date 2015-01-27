@@ -11,17 +11,14 @@ include('../modules/application/src/application/forms/userForm.php');
 include('../modules/core/src/core/models/validateForm.php');
 include('../modules/core/src/core/models/filterForm.php');
 include('../modules/core/src/core/models/renderForm.php');
+include('../modules/core/src/core/models/renderView.php');
 
 
-$filename = '../data/usuarios.txt';
+$filename = $config['filename'];
 
 
-if(isset($_GET['action']))
-    $action = $_GET['action'];
-else
-    $action = 'select';
 
-switch($action)
+switch($request['action'])
 {
     case 'insert':
         if($_POST)
@@ -34,12 +31,12 @@ switch($action)
             {
                 insertUser($filterdata, $filename);            
             }
-            header('Location: /usuarios.php');
+            header('Location: /users');
         }
         else
         {
             $usuario=array('','','','','','',array(),'','',array());
-            include('../modules/application/src/application/views/usuarios/insert.phtml');
+            $content = renderView($request, $config, array('usuario'=>$usuario));
         }
             
     break;
@@ -55,12 +52,15 @@ switch($action)
             {
                 $usuario = updateUser($filterdata['id'], $filterdata, $filename);
             }
-            header('Location: /usuarios.php');            
+            header('Location: /users');            
         }
         else 
         {
-            $usuario = getUser($_GET['id'], $filename);
-            include('../modules/application/src/application/views/usuarios/update.phtml');            
+            $usuario = getUser($request['params']['id'], $filename);
+            ob_start();
+                include('../modules/application/src/application/views/usuarios/update.phtml');
+                $content = ob_get_contents();
+            ob_end_clean();
         }
     break;
     
@@ -68,22 +68,27 @@ switch($action)
         if(isset($_POST['id']))
         {
             deleteUser($_POST['id'], $filename);
-            header('Location: /usuarios.php');
+            header('Location: /users');
         }
         else
         {
-            include('../modules/application/src/application/views/usuarios/delete.phtml');
+            ob_start();
+                include('../modules/application/src/application/views/usuarios/delete.phtml');
+                $content = ob_get_contents();
+            ob_end_clean();
         }
             
     break;
     
     default:
     case 'select':  
-        $usuarios = getUsers($filename);
-        include('../modules/application/src/application/views/usuarios/select.phtml');
+        $usuarios = getUsers($filename);        
+        $content = renderView($request, $config, array('usuarios'=>$usuarios));
     break;
 }
 
+
+include('../modules/application/src/application/layouts/dashboard.phtml');
 
 
 

@@ -1,24 +1,28 @@
 <?php
 
+require_once('../modules/core/src/core/models/parseURL.php');
+require_once('../modules/core/src/core/models/getConfig.php');
 
-echo "<pre>";
-print_r($_SERVER['REQUEST_URI']);
-echo "</pre>";
-
-
-
+$config = getConfig();
 $request = parseURL();
+// $request = routeURL($request);
+
 
 
 switch($request['controller'])
 {
-    case 'usuarios':
-        include('../modules/application/src/application/controllers/usuarios.php');
+    case 'users':
+        include('../modules/application/src/application/controllers/users.php');
     break;
     
     case 'error':
         include('../modules/application/src/application/controllers/error.php');
-    break;    
+    break; 
+
+    case 'index':
+        include('../modules/application/src/application/controllers/index.php');
+    break;
+    
         
     
 }
