@@ -1,5 +1,6 @@
 <?php
 
+
 require_once('../modules/core/src/core/models/parseURL.php');
 require_once('../modules/core/src/core/models/getConfig.php');
 
