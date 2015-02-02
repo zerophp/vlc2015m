@@ -1,13 +1,16 @@
 <?php
 
 include ('../modules/application/src/application/models/getUsers.php');
+include ('../modules/application/src/application/models/getUsersDB.php');
 include ('../modules/application/src/application/models/getUser.php');
 include ('../modules/application/src/application/models/insertUser.php');
+include ('../modules/application/src/application/models/insertUserDB.php');
 include ('../modules/application/src/application/models/updateUser.php');
 include ('../modules/application/src/application/models/deleteUser.php');
 
 include('../modules/application/src/application/forms/userForm.php');
 
+include('../modules/core/src/core/models/getColumns.php');
 include('../modules/core/src/core/models/validateForm.php');
 include('../modules/core/src/core/models/filterForm.php');
 include('../modules/core/src/core/models/renderForm.php');
@@ -24,13 +27,13 @@ switch($request['action'])
     case 'insert':
         if($_POST)
         {                   
-            $_POST[]=$_FILES['photo']['name'];
             $filterdata = filterForm($userForm, $_POST);
             $validatedata = validateForm($userForm, $filterdata);
-            
             if($validatedata)
             {
-                insertUser($filterdata, $filename);            
+                
+                //insertUser($filterdata, $filename);
+                insertUserDB($config, $filterdata);            
             }
             header('Location: /users');
         }
@@ -78,7 +81,8 @@ switch($request['action'])
     default:
     case 'index':
     case 'select':  
-        $usuarios = getUsers($filename);        
+        //$usuarios1 = getUsers($filename);
+        $usuarios = getUsersDB($config);        
         $content = renderView($request, $config, array('usuarios'=>$usuarios));
     break;
 }

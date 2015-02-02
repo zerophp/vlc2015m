@@ -1,7 +1,7 @@
 <?php
 
 $userForm = array(
-    'id'=>array(
+    'iduser'=>array(
         'label'=>null,
         'type'=>'hidden',
         'value'=>1                
@@ -56,11 +56,11 @@ $userForm = array(
         'validation'=>array('date',
                             'error_message'=>'Error aqui'),                
     ),
-    'city'=>array(
+    'cities_idcity'=>array(
         'label'=>'Ciudad',
         'type'=>'select',
         //'value'=>null,
-        'options'=>array('BCN'=>'Barcelona', 'VLC'=>'Valencia'),
+        'options'=>array('1'=>'Barcelona', '2'=>'Valencia', '3'=>'Madrid'),
         'placeholder'=>'Selecciona tu ciudad',
         'help'=>'en la que vives!!!!',
         'validation'=>array('required'=>true, 
@@ -68,10 +68,10 @@ $userForm = array(
                             'error_message'=>'Error aqui'
         ),       
     ),
-    'gender'=>array(
+    'genders_idgender'=>array(
         'label'=>'Sexo',
         'type'=>'radio',
-        'options'=>array('m'=>'Mujer', 'h'=>'Hombre', 'o'=>'Otros'),                
+        'options'=>array('1'=>'Mujer', '2'=>'Hombre', '3'=>'Otros'),                
     ),
     'privacy'=>array(
         'label'=>'Politica de provacidad',
