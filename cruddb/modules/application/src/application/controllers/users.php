@@ -2,11 +2,14 @@
 
 include ('../modules/application/src/application/models/getUsers.php');
 include ('../modules/application/src/application/models/getUsersDB.php');
+include ('../modules/application/src/application/models/getUserDB.php');
 include ('../modules/application/src/application/models/getUser.php');
 include ('../modules/application/src/application/models/insertUser.php');
 include ('../modules/application/src/application/models/insertUserDB.php');
 include ('../modules/application/src/application/models/updateUser.php');
+include ('../modules/application/src/application/models/updateUserDB.php');
 include ('../modules/application/src/application/models/deleteUser.php');
+include ('../modules/application/src/application/models/deleteUserDB.php');
 
 include('../modules/application/src/application/forms/userForm.php');
 
@@ -47,20 +50,20 @@ switch($request['action'])
     
     case 'update':
         if($_POST)
-        {            
-            $_POST[] = $_FILES['photo']['name'];
+        {
             $filterdata = filterForm($userForm, $_POST);
             $validatedata = validateForm($userForm, $filterdata);
             
             if($validatedata)
             {
-                $usuario = updateUser($filterdata['id'], $filterdata, $filename);
+                // $usuario = updateUser($filterdata['id'], $filterdata, $filename);
+                $usuario = updateUserDB($config, $filterdata);
             }
             header('Location: /users');            
         }
         else 
         {
-            $usuario = getUser($request['params']['id'], $filename);            
+            $usuario = getUserDB($config, $request['params']['id']);
             $content = renderView($request, $config, array('usuario'=>$usuario));
         }
     break;
@@ -68,12 +71,16 @@ switch($request['action'])
     case 'delete':
         if(isset($_POST['id']))
         {
-            deleteUser($_POST['id'], $filename);
+//             deleteUser($_POST['id'], $filename);
+            if($_POST['submit']=='Bórrame!')
+            {
+                deleteUserDB($config, $_POST['id']);
+            }
             header('Location: /users');
         }
         else
         {
-            $content = renderView($request, $config);
+            $content = renderView($request, $config, array('usuario'=>$request['params']['id']));
         }
             
     break;
@@ -89,13 +96,3 @@ switch($request['action'])
 
 
 include('../modules/application/src/application/layouts/dashboard.phtml');
-
-
-
-
-
-
-
-
-
-

@@ -1,7 +1,6 @@
 <?php 
 $usuarios = $data['usuarios'];
 ?>
-
 <a href="/users/insert">Insert</a>
 <table  class="table table-striped">
 <?php foreach ($usuarios as $key => $usuario):
@@ -12,8 +11,8 @@ $usuarios = $data['usuarios'];
             <td> <?=$data;?> </td>
         <?php endforeach;?>
         <td>
-            <a href="/users/update/id/<?=$key;?>">Update</a> | 
-            <a href="/users/delete/id/<?=$key;?>">Delete</a>
+            <a href="/users/update/id/<?=$usuario[0];?>">Update</a> | 
+            <a href="/users/delete/id/<?=$usuario[0];?>">Delete</a>
         </td>
     </tr>
 <?php endforeach;?>
