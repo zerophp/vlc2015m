@@ -16,26 +16,8 @@ $request = core\models\FrontController::parseURL();
 // echo "</pre>";
 
 
-
-
-
-switch($request['controller'])
-{
-    case 'users':
-        include('../modules/application/src/application/controllers/users.php');
-    break;
-    
-    case 'error':
-        include('../modules/application/src/application/controllers/error.php');
-    break; 
-
-    case 'index':
-        include('../modules/application/src/application/controllers/index.php');
-    break;
-    
-        
-    
-}
+$dispatch = new core\models\Dispatch($request);
+$dispatch->run();
 
 
 
