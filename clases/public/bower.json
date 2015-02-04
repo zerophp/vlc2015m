@@ -1,0 +1,21 @@
+{
+  "name": "clases",
+  "version": "1.0.0",
+  "homepage": "https://github.com/agustincl/vlc2015m",
+  "authors": [
+    "Agustin Calderon <agustincl@gmail.com>"
+  ],
+  "description": "Clases en phph",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.2"
+  }
+}
