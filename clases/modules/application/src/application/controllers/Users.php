@@ -1,4 +1,19 @@
 <?php
+namespace application\controllers;
+
+
+class Users
+{
+    public function insertAction();
+    public function deleteAction();
+    public function selectAction();
+    public function updateAction();
+    
+    public function otroMetodo();
+    
+    
+}
+
 
 include ('../modules/application/src/application/models/getUsers.php');
 include ('../modules/application/src/application/models/getUsersDB.php');

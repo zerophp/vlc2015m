@@ -14,15 +14,22 @@ class FrontController
     
     public static function parseURL()
     {
-         
-        $controllers = array ('users'=>array('index','insert', 'select', 'update', 'delete'),
-            'error'=>array('404'),
-            'index'=>array('index')
-        );
+
+//         get_class_methods($class_name)
+        
+//         $controllers = array ('users'=>array('index','insert', 'select', 'update', 'delete'),
+//             'error'=>array('404'),
+//             'index'=>array('index')
+//         );
     
         // dividir la url en un array
         $request = explode("/", $_SERVER['REQUEST_URI']);
-         
+
+        $request[1]=ucfirst($request[1]);
+        
+        
+       
+    
         if($request[1]=='')
             return array('controller'=>'index',
                 'action'=>'index'
@@ -31,7 +38,7 @@ class FrontController
             // Mientras que el ultimo elemento es vacio, eliminarlo
             while($request[count($request)-1]=='')
                 unset($request[count($request)-1]);
-    
+            
             // Tiene parametros?
             $params = array();
             // Es longitud par?
@@ -50,6 +57,7 @@ class FrontController
                 }
             }
     
+            
             if(file_exists($_SERVER['DOCUMENT_ROOT'].
                 "/../modules/application/src/application/controllers/".
                 $request[1].".php")
@@ -71,9 +79,11 @@ class FrontController
                 }
                 else
                 {
-                    return array('controller'=>$request[1],
-                        'action'=>'index'
+                    $array = array('controller'=>'application\controllers\\'.$request[1],
+                        'action'=>'indexAction'
                     );
+                    
+                    return $array;
                 }
             }
             else
