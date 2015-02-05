@@ -3,35 +3,51 @@ namespace core\models;
 
 class FrontController
 {
-
-    public static function getConfig()
+    private $config;
+    public $request;
+    private $response;
+    private $layout;
+    
+    public function __construct(array $appConfig)
     {
-        return (array_merge(require_once('../configs/global.php'),
-                    require_once('../configs/local.php')
-                )
-        );         
+        $this->config = $this->getConfig($appConfig);
+        $this->request = $this->parseURL();
     }
     
-    public static function parseURL()
-    {
-
-//         get_class_methods($class_name)
-        
-//         $controllers = array ('users'=>array('index','insert', 'select', 'update', 'delete'),
-//             'error'=>array('404'),
-//             'index'=>array('index')
-//         );
     
+    
+    public function getConfig($appConfig)
+    {
+        $config=array();
+        
+        foreach($appConfig['modules'] as $module)
+        {
+            $configGlobal=array();
+            $configLocal=array();
+            
+            if(file_exists('../configs/autoload/'.$module.'.global.php'))
+                $configGlobal = include_once('../configs/autoload/'.$module.'.global.php');
+            if(file_exists('../configs/autoload/'.$module.'.local.php'))
+                $configLocal = include_once('../configs/autoload/'.$module.'.local.php');
+            
+            $config = array_merge($config,
+                                  $configGlobal,
+                                  $configLocal
+                                 );         
+        }
+     
+        return $config;
+                 
+    }
+    
+    public function parseURL()
+    {
         // dividir la url en un array
         $request = explode("/", $_SERVER['REQUEST_URI']);
-
-        $request[1]=ucfirst($request[1]);
-        
-        
-       
+        $request[1]=ucfirst($request[1]);            
     
         if($request[1]=='')
-            return array('controller'=>'index',
+            return array('controller'=>'application\\controllers\\Index',
                 'action'=>'index'
             );
     
@@ -45,8 +61,8 @@ class FrontController
             if(count($request)>3 && (count($request)%2)==0)
             {
                 // KO deveolver error 412
-                return array('controller'=>'error',
-                    'action'=>'412'
+                return array('controller'=>'application\\controllers\\Error',
+                    'action'=>'error412'
                 );
             }
             else
@@ -64,23 +80,23 @@ class FrontController
             )
             {
                 if(isset($request[2]))
-                    if(in_array($request[2], $controllers[$request[1]]))
+                    if(method_exists('application\\controllers\\'.$request[1], $request[2]))
                     {
-                        return array('controller'=>$request[1],
+                        return array('controller'=>'application\\controllers\\'.$request[1],
                             'action'=>$request[2],
                             'params'=>$params
                         );
                     }
                 else
                 {
-                    return array('controller'=>'error',
-                        'action'=>'404'
+                    return array('controller'=>'application\\controllers\\Error',
+                        'action'=>'error404'
                     );
                 }
                 else
                 {
-                    $array = array('controller'=>'application\controllers\\'.$request[1],
-                        'action'=>'indexAction'
+                    $array = array('controller'=>'application\\controllers\\'.$request[1],
+                        'action'=>'index'
                     );
                     
                     return $array;
@@ -88,10 +104,30 @@ class FrontController
             }
             else
             {
-                return array('controller'=>'error',
-                    'action'=>'404'
+                return array('controller'=>'application\\controllers\\Error',
+                    'action'=>'error404'
                 );
             }
+    }
+       
+    public function dispatch()
+    {
+        $controllername = $this->request['controller'];
+        $actionname = $this->request['action'];
+    
+        $controller = new $controllername();
+        $this->layout = $controller->layout;
+        $controller->setRequest($this->request);
+        $controller->setConfig($this->config);
+        
+        $this->response = $controller->$actionname($this->request, $this->config);
+        $this->renderLayout();
+    }
+    
+    public function renderLayout()
+    {
+        $content = $this->response;
+        require_once('../modules/application/src/application/layouts/'.$this->layout.'.phtml');        
     }
 }
 

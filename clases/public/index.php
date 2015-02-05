@@ -1,32 +1,21 @@
 <?php
 require_once('../autoload.php');
 
-$config = core\models\FrontController::getConfig();
-$request = core\models\FrontController::parseURL();
-// $request = core\models\FrontController::routeURL($request);
+if(getenv('APPLICATION_ENV')=='development')    
+    $config = require_once ('../configs/development.config.php');
+else 
+    $config =  require_once ('../configs/config.php');
 
-// $mysql = new acl\adapters\MysqlAdapter($config['db']);
+$fc = new core\models\FrontController($config);
+$fc->dispatch();
 
-// $query = "SELECT * FROM users";
+// $request = array('controller'=>'application\controllers\index',
+//                  'action'=>'index'
+// );
+// $config = array('view_path'=>$_SERVER['DOCUMENT_ROOT'].'/../modules/application/src/application/views',
+//     );
 
-// $usuario = $mysql->querySelect($query);
-
-// echo "<pre>";
-// print_r($usuario);
-// echo "</pre>";
-
-
-$dispatch = new core\models\Dispatch($request);
-$dispatch->run();
-
-
-
-
-
-
-
-
-
-
-
-
+// $controller = new application\controllers\Index();
+// $controller->setRequest($request);
+// $controller->setConfig($config);
+// echo $controller->index();
