@@ -6,8 +6,14 @@ if(getenv('APPLICATION_ENV')=='development')
 else 
     $config =  require_once ('../configs/config.php');
 
-$fc = new core\models\FrontController($config);
+// $fc = new core\models\FrontController($config);
+// $fc->dispatch();
+
+
+$fc = core\models\FrontController::getInstace($config);
 $fc->dispatch();
+
+
 
 // $request = array('controller'=>'application\controllers\index',
 //                  'action'=>'index'

@@ -1,5 +1,4 @@
 <?php
-
 return array (
     'filename'=> '../data/usuarios.txt',
     'config1'=>'data1',
@@ -9,5 +8,6 @@ return array (
                 'user'=>'root',
                 'password'=>'1234',
                 'database'=>'crud'),
+    'adapter'=>'Mysql',
     
 );

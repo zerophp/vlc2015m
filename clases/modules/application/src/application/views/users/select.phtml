@@ -1,5 +1,11 @@
 <?php 
 $usuarios = $data['usuarios'];
+foreach ($usuarios as $user)
+{
+    $user = implode("|", $user);
+    $rows[]=$user;
+}
+$usuarios=$rows;
 ?>
 <a href="/users/insert">Insert</a>
 <table  class="table table-striped">

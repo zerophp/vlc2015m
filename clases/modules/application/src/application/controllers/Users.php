@@ -1,26 +1,27 @@
 <?php
 namespace application\controllers;
 
+use \application\models\UsersMapper;
+use \core\models\Views;
 
+// include ('../modules/application/src/application/models/getUsers.php');
 
-include ('../modules/application/src/application/models/getUsers.php');
+// include ('../modules/application/src/application/models/getUserDB.php');
+// include ('../modules/application/src/application/models/getUser.php');
+// include ('../modules/application/src/application/models/insertUser.php');
+// include ('../modules/application/src/application/models/insertUserDB.php');
+// include ('../modules/application/src/application/models/updateUser.php');
+// include ('../modules/application/src/application/models/updateUserDB.php');
+// include ('../modules/application/src/application/models/deleteUser.php');
+// include ('../modules/application/src/application/models/deleteUserDB.php');
 
-include ('../modules/application/src/application/models/getUserDB.php');
-include ('../modules/application/src/application/models/getUser.php');
-include ('../modules/application/src/application/models/insertUser.php');
-include ('../modules/application/src/application/models/insertUserDB.php');
-include ('../modules/application/src/application/models/updateUser.php');
-include ('../modules/application/src/application/models/updateUserDB.php');
-include ('../modules/application/src/application/models/deleteUser.php');
-include ('../modules/application/src/application/models/deleteUserDB.php');
+// include('../modules/application/src/application/forms/userForm.php');
 
-include('../modules/application/src/application/forms/userForm.php');
-
-include('../modules/core/src/core/models/getColumns.php');
-include('../modules/core/src/core/models/validateForm.php');
-include('../modules/core/src/core/models/filterForm.php');
-include('../modules/core/src/core/models/renderForm.php');
-include('../modules/core/src/core/models/renderView.php');
+// include('../modules/core/src/core/models/getColumns.php');
+// include('../modules/core/src/core/models/validateForm.php');
+// include('../modules/core/src/core/models/filterForm.php');
+// include('../modules/core/src/core/models/renderForm.php');
+// include('../modules/core/src/core/models/renderView.php');
 
 
 class Users
@@ -74,10 +75,12 @@ implements \core\models\ControllerInterface
     }
     public function select($request, $config)
     {
-        include ('../modules/application/src/application/models/getUsersDB.php');
-        $usuarios = getUsersDB($config);
-        $content = renderView($request, $config, array('usuarios'=>$usuarios));
-        
+        $users = new UsersMapper();
+        $usuarios = $users->getUsers();
+        $content = Views::renderView(__METHOD__,
+                                                  $this->getConfig(), 
+                                                  array('usuarios'=>$usuarios)
+                                                 );        
         return $content;
     }
     public function update()

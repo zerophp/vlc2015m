@@ -1,22 +1,37 @@
 <?php
 namespace core\models;
 
+use Zend\Http\Header\From;
 class FrontController
 {
     private $config;
     public $request;
     private $response;
     private $layout;
+    public static $instance;
     
-    public function __construct(array $appConfig)
+    public static function getInstace(array $appConfig=null)
     {
-        $this->config = $this->getConfig($appConfig);
-        $this->request = $this->parseURL();
+        if(!self::$instance)
+            self::$instance = new FrontController($appConfig);
+        
+        return self::$instance; 
+        
     }
     
     
+    private function __construct(array $appConfig)
+    {
+        $this->config = $this->setConfig($appConfig);
+        $this->request = $this->parseURL();
+    }
     
-    public function getConfig($appConfig)
+    public function getConfig()
+    {
+        return $this->config;
+    }
+    
+    public function setConfig($appConfig)
     {
         $config=array();
         
