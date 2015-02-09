@@ -4,12 +4,6 @@
     "license": "BSD-3-Clause",
     "require": {
         "php": ">=5.3.3",
-        "agustincl/phpzero": "1.0.0",
-        "zfcampus/statuslib-example": "dev-master",
-        "danielss89/zfc-user-admin" : "dev-master",
-        "michelf/php-markdown": "~1.4",
-        "moontoast/math": "*",
-        "bjyoungblood/bjy-profiler": "dev-master",
-        "acelaya/zf2-acassets": "2.0.*"        
+        "agustincl/phpzero": "1.0.0"        
     }
 }

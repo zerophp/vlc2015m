@@ -1,7 +1,7 @@
 <?php
+namespace application\entity;
 
-
-class UserEntity
+class UserEntity 
 {
     public $iduser;
     public $name;
@@ -27,6 +27,15 @@ class UserEntity
     public function setPassword($password)
     {
         $this->password = $password;
+    }
+    
+    public function hydrate($data)
+    {        
+        foreach($this as $key => $property)
+        {   
+            $this->$key = $data[$key];
+        }
+        return $this;
     }
 
     

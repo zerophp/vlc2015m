@@ -22,7 +22,7 @@ class FrontController
     
     private function __construct(array $appConfig)
     {
-        $this->config = $this->setConfig($appConfig);
+        $this->config = $this->moduleManager($appConfig);
         $this->request = $this->parseURL();
     }
     
@@ -31,7 +31,22 @@ class FrontController
         return $this->config;
     }
     
-    public function setConfig($appConfig)
+    public function moduleManager($appConfig)
+    {
+        $config=array();
+    
+        $obj = new \stdClass();
+        
+        foreach($appConfig['modules'] as $module)
+        {
+            $moduleclass = '\\'.$module.'\\Module';
+            $mod = new $moduleclass();
+            $obj->$module = $mod->getOptions();
+        }         
+        return $obj;         
+    }
+    
+    /*public function setConfig($appConfig)
     {
         $config=array();
         
@@ -53,7 +68,7 @@ class FrontController
      
         return $config;
                  
-    }
+    }*/
     
     public function parseURL()
     {
