@@ -1,0 +1,9 @@
+{
+    "name": "clases",
+    "description": "clases",
+    "license": "BSD-3-Clause",
+    "require": {
+        "php": ">=5.3.3",
+        "agustincl/phpzero": "dev-master"        
+    }
+}

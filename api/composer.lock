@@ -1,0 +1,69 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "ce475c14cc0d28510769adcc675a3178",
+    "packages": [
+        {
+            "name": "agustincl/phpzero",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/agustincl/phpzero.git",
+                "reference": "4d8b718fe97c244973b503b77f41fe14120a6774"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/agustincl/phpzero/zipball/4d8b718fe97c244973b503b77f41fe14120a6774",
+                "reference": "4d8b718fe97c244973b503b77f41fe14120a6774",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.23"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Phpzero\\": "src/"
+                },
+                "classmap": [
+                    "Module.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Agustín F. Calderón M",
+                    "email": "agustincl@gmail.com",
+                    "homepage": "http://agustincl.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Development infrastructure for PHP",
+            "homepage": "http://github.com/agustincl/phpzero",
+            "keywords": [
+                "development",
+                "infrastructure",
+                "zf2"
+            ],
+            "time": "2015-02-10 08:49:02"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "agustincl/phpzero": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.3.3"
+    },
+    "platform-dev": []
+}
