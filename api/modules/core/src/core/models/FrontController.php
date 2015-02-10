@@ -72,6 +72,17 @@ class FrontController
     
     public function parseURL()
     {
+        
+        
+        //$headers = get_headers($_SERVER['HTTP_ACCEPT']);
+        $headers = getallheaders();
+
+        
+//         echo "<pre>";
+//         print_r($headers);
+//         echo "</pre>";
+        
+        
         // dividir la url en un array
         $request = explode("/", $_SERVER['REQUEST_URI']);
         $request[1]=ucfirst($request[1]);            
@@ -109,6 +120,17 @@ class FrontController
                 $request[1].".php")
             )
             {
+                if($headers['Accept']=='application/json')
+                {
+                    if(isset($request[2]))
+                    return array('controller'=>'application\\controllers\\'.$request[1],
+                            'action'=>'index',
+                            'params'=>$request[2]
+                        ); 
+                    else return array('controller'=>'application\\controllers\\'.$request[1],
+                            'action'=>'index'                           
+                        );
+                }
                 if(isset($request[2]))
                     if(method_exists('application\\controllers\\'.$request[1], $request[2]))
                     {
@@ -156,6 +178,8 @@ class FrontController
     
     public function renderLayout()
     {
+        if($this->layout==NULL)
+            return;
         $content = $this->response;
         require_once('../modules/application/src/application/layouts/'.$this->layout.'.phtml');        
     }

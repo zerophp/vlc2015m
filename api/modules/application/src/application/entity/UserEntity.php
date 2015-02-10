@@ -37,6 +37,16 @@ class UserEntity
         }
         return $this;
     }
+    
+    public function extract()
+    {
+        $array = [];
+        foreach ($this as $key => $value)
+        {
+            $array[$key]=$value;
+        }
+        return $array;
+    }
 
     
     

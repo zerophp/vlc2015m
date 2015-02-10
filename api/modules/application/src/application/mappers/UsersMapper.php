@@ -56,7 +56,7 @@ class UsersMapper
             $entity->hydrate($user);
             $this->collection->{$entity->iduser}=$entity;
         }   
-          
+        
         //return $this->collection;
         return $users;
     }
@@ -72,7 +72,7 @@ class UsersMapper
         $entity->hydrate($user);
         
         
-        return $this->entity;
+        return $entity;
 //         return $user;
     }
     

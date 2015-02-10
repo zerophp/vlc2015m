@@ -17,10 +17,8 @@ class UsersService
         $users = new UsersMapper();
         $user = $users->getUser($id);
         
-        return $user;
-        
         if($user instanceof UserEntity)
-            return $users->getUsers();
+            return $user;
         else
             die ("kaka");
         
